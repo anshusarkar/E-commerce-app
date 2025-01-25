@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biswarup Enterprise E-Commerce App</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Biswarup Enterprise</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Categories</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="hero">
+    <h2>Welcome to Our Store!</h2>
+    <p>Shop the latest products at unbeatable prices.</p>
+</div>
+
+<section class="products">
+    
+    <div class="product">
+        <img src="{{ url_for('static', filename='images/Cadbury_choco_bakes.jpg') }}" alt="{{ products.name }}"
+        data-fullsize="{{ url_for('static', filename='images/Cadbury_choco_bakes.jpg' ) }}">
+        <h3>{{ products[0].name }}</h3>
+        <p>{{ products[0].price }}</p>
+        <!-- <button>Add to Cart</button> -->
+        
+    </div>
+    
+    <div class="product">
+        <img src="{{ url_for('static', filename='images/DEEP_tea.jpg') }}" alt="{{ products.name }}"
+        data-fullsize="{{ url_for('static', filename='images/DEEP_tea.jpg' ) }}">
+        <h3>{{ products[1].name }}</h3>
+        <p>{{ products[1].price }}</p>
+        <!-- <button>Add to Cart</button> -->
+    </div>
+    <div class="product">
+        <img src="{{ url_for('static', filename='images/Soya_sauce.jpg') }}" alt="{{ products.name }}"
+        data-fullsize="{{ url_for('static', filename='images/Soya_sauce.jpg' ) }}">
+        <h3>{{ products[2].name }}</h3>
+        <p>{{ products[2].price }}</p>
+        <!-- <button>Add to Cart</button> -->
+    </div>
+    <div class="product">
+        <img src="{{ url_for('static', filename='images/Tomato_Ketchup.jpg') }}" alt="{{ products.name }}"
+        data-fullsize="{{ url_for('static', filename='images/Tomato_Ketchup.jpg' ) }}">
+        <h3>{{ products[3].name }}</h3>
+        <p>{{ products[3].price }}</p>
+        <!-- <button>Add to Cart</button> -->
+    </div>
+    <div id="lightbox" class="hidden">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full-size image">
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Biswarup Enterprise. All rights reserved.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const closeBtn = document.querySelector("#lightbox .close");
+
+        // Add click event to product images
+        document.querySelectorAll(".product img").forEach(img => {
+            img.addEventListener("click", () => {
+                const fullSizeSrc = img.getAttribute("data-fullsize");
+                lightboxImg.src = fullSizeSrc;
+                lightbox.style.display = "flex";
+            });
+        });
+
+        // Close the lightbox
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+        });
+
+        // Close on clicking outside the image
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    });
+    
+</script>
+
+</body>
+</html>
